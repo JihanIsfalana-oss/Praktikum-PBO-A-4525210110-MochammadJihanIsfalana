@@ -34,33 +34,31 @@ public class Mahasiswa {
         // TODO 2: tolak NIM yang kosong atau null.
         //         Lemparkan IllegalArgumentException dengan pesan yang menyebut
         //         APA yang salah — bukan sekadar "Error".
-        if(nim == null) {
+        if(nim == null || nim.isBlank()) {
             throw new IllegalArgumentException("NIM Mahasiswa tidak boleh NULL, harus Mempunyai Nilai !");
         }
         // TODO 3: tolak setiap komponen nilai yang di luar rentang 0-100.
         //         Petunjuk: buat satu method privat pembantu agar tidak menulis
         //         pemeriksaan yang sama tiga kali.
-        if(nilaiAkhir < 0) {
-            pastikanNilaiSah("Nilai tidak boleh kurang dari 0 !", nilaiAkhir);
-        } else if(nilaiAkhir > 100) {
-            pastikanNilaiSah("Nilai tidak boleh lebih dari 0 !", nilaiAkhir);
-        }
+        pastikanNilaiSah("Nilai Tugas\t: ", nilaiTugas);
+        pastikanNilaiSah("Nilai UTS\t: ", nilaiUts);
+        pastikanNilaiSah("Nilai UAS\t: ", nilaiUas);
 
         this.nim = nim;
         this.nama = nama;
         this.nilaiTugas = nilaiTugas;
         this.nilaiUts = nilaiUts;
         this.nilaiUas = nilaiUas;
+        this.nilaiAkhir = nilaiAkhir();
     }
 
     // TODO 4: buat method privat pembantu untuk memvalidasi satu komponen nilai.
     //         Tanda tangan yang disarankan:
     //         private static void pastikanNilaiSah(String namaKomponen, double nilai)
     private  static void pastikanNilaiSah(String namaKomponen, double nilai) {
-        if(nilai < NILAI_MIN) {
-            throw new IllegalArgumentException(namaKomponen);
-        } else if(nilai > NILAI_MAX) {
-            throw new IllegalArgumentException(namaKomponen);
+        if(nilai < NILAI_MIN || nilai > NILAI_MAX) {
+            throw new IllegalArgumentException(
+                namaKomponen + "Rentang nilai berada diluar jangkauan, ditemukan: " + nilai);
         }
     }
 
@@ -69,11 +67,7 @@ public class Mahasiswa {
      * TODO 5: hitung nilai akhir memakai konstanta bobot di atas.
      */
     private double nilaiAkhir() {
-        nilaiTugas = nilaiTugas * BOBOT_TUGAS;
-        nilaiUas = nilaiUas * BOBOT_UAS;
-        nilaiUts = nilaiUts * BOBOT_UTS;
-        nilaiAkhir = (nilaiTugas + nilaiUas + nilaiUts);
-        return nilaiAkhir;   // ganti
+        return (nilaiTugas * BOBOT_TUGAS) + (nilaiUts * BOBOT_UTS) + (nilaiUas * BOBOT_UAS);   // ganti
     }
 
     /**
@@ -102,7 +96,7 @@ public class Mahasiswa {
 
     public String getNim()  { return this.nim; }
     public String getNama() { return this.nama; }
-    public double getNilaiAkhir() {return nilaiAkhir();}
+    public double getNilaiAkhir() {return nilaiAkhir;}
 
     @Override
     public String toString() {
