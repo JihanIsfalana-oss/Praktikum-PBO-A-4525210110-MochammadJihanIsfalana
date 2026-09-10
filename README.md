@@ -1,4 +1,4 @@
-# PEMROGRAMAN BERBASIS OBJEK
+# PEMROGRAMAN BERORIENTASI OBJEK
 
 ```Identitas Mahasiswa
 Nama            : Mochammad Jihan Isfalana
