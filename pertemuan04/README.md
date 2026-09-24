@@ -1,18 +1,53 @@
-## Getting Started
+# LAPORAN PRAKTIKUM PBO A - PERTEMUAN 4
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+**Nama :** Mochammad Jihan Isfalana
+**NPM :** 4525210110
+**Mata Kuliah :** Praktikum Pemrograman Berorientasi Objek
 
-## Folder Structure
+## Materi
 
-The workspace contains two folders by default, where:
+## `Pegawai Menggunakan Java & PHP`
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+`Materi : Inheritance (Pewarisan)`
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Screenshot Coding Main.java
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+![alt text](img/Main.png)
 
-## Dependency Management
+## Screenshot Coding Pegawai.java
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+![alt text](img/Pegawai.png)
+
+## Screenshot Coding PegawaiKontrak.java
+
+![alt text](img/PegawaiKontrak.png)
+
+## Screenshot Coding PegawaiHarian.java
+
+![alt text](img/PegawaiHarian.png)
+
+## Screenshot Coding PegawaiTetap.java
+
+![alt text](img/PegawaiTetap.png)
+
+## Screenshot Coding Dosen.java
+
+![alt text](img/Dosen.png)
+
+## Screenshot Hasil Running Java
+
+![alt text](img/hasilrunning.png)
+
+## Screenshot Coding Main.php
+
+![alt text](img/MainPHP.png)
+
+## Screenshot Coding Pegawai.php
+
+![alt text](img/PegawaiPHP&PegawaiTetap.png)
+![alt text](img/PegawaiHarianPHP.png)
+![alt text](img/PegawaiKontrak&Dosen.png)
+
+## Screenshot Hasil Running PHP
+
+![alt text](img/hasilrunningPHP.png)
