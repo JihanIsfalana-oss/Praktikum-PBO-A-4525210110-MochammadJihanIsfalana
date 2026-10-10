@@ -11,8 +11,8 @@ Semester                  : 3 (Ganjil)
 
 ## **TEKNOLOGI / BAHASA PEMROGRAMAN**
 
-- `PHP` --> **FRAMEWORK :** `LARAVEL`
-- `JAVA` --> **FRAMEWORK :** `SPRING`
+- `PHP` Dasar OOP
+- `JAVA` Dasar OOP
 - `VISUAL STUDIO CODE` --> **AS A :** `IDE`
 - `EXTENSIONS` --> **USING :** `JAVA RED HAT`, `PHP INTELIPHENSE`, `PRETTIER`, `ERROR LENS`
 
