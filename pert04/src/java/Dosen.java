@@ -1,5 +1,3 @@
-package javafile;
-
 public class Dosen extends PegawaiTetap {
 
     private final String bidangKeahlian;

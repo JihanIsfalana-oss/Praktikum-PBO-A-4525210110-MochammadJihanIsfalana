@@ -1,5 +1,3 @@
-package javafile;
-
 public class PegawaiHarian extends Pegawai {
 
     private final int jamKerja;

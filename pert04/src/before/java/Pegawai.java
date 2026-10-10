@@ -1,5 +1,3 @@
-package javafile;
-
 /**
  * Sesi 4 — kelas induk.
  * Menampung apa yang BENAR-BENAR SAMA di semua jenis pegawai.
@@ -17,9 +15,6 @@ public abstract class Pegawai {
 
     protected Pegawai(String nip, String nama, double gajiPokok) {
         // TODO 1: tolak gaji pokok negatif.
-        if (gajiPokok < 0) {
-            throw new IllegalArgumentException("Gaji pokok tidak boleh negatif: " + gajiPokok);
-        }
 
         this.nip = nip;
         this.nama = nama;
@@ -31,7 +26,7 @@ public abstract class Pegawai {
      *         Turunan akan MENAMBAH, bukan mengganti seluruhnya.
      */
     public double hitungGaji() {
-        return gajiPokok;
+        return 0;   // ganti
     }
 
     /** Turunan wajib menyebutkan jenisnya sendiri. */

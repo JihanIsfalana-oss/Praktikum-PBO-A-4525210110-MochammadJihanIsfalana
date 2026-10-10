@@ -1,5 +1,3 @@
-package javafile;
-
 public class PegawaiTetap extends Pegawai {
 
     /** Tunjangan masa kerja: 2% gaji pokok per tahun, maksimum 40%. */
