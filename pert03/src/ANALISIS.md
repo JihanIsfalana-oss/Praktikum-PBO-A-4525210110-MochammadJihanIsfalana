@@ -71,10 +71,3 @@ Baik di Java maupun PHP, *counter* jumlah rekening (`jumlahRekening++` / `self::
 1. **Java** memberikan fleksibilitas penulisan banyak constructor yang sangat rapi untuk variasi inisialisasi objek.
 2. **PHP 8** menawarkan modernisasi kode lewat *Constructor Property Promotion* yang memangkas boilerplate code (baris kode repetitif), menjadikannya jauh lebih ringkas daripada Java dalam mendeklarasikan properti kelas.
 3. Pemahaman *scope resolution operator* di PHP (`self::` untuk kelas saat ini, `static::` untuk polimorfisme runtime) sangat krusial agar tidak terjadi *bug* arsitektur saat kelas diwariskan.
-
----
-
-## 5. Penggunaan AI
-Tools   : Gemini
-Prompt  : buatkan saya analisis.md nya yang rapi, terstruktur, jelas dari code java dan php ini
-(CODE JAVA & PHP YANG SAYA BERIKAN UNTUK DIBUAT ANALISIS.md)

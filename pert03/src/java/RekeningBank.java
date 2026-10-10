@@ -1,3 +1,4 @@
+package java;
 /**
  * Sesi 3 — constructor berdelegasi, anggota statis, dan konstanta.
  *
