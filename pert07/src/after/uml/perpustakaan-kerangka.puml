@@ -1,0 +1,91 @@
+@startuml perpustakaan-class
+title Model Relasi Perpustakaan (Sesi 7)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package model {
+
+  class Buku {
+    - nomorInduk : String
+    - judul : String
+    - penulis : String
+    - jumlahEksemplar : int
+    - bab : List<Bab>
+    + Buku(nomorInduk : String, judul : String, penulis : String, jumlahEksemplar : int)
+    + tambahBab(nomor : int, judulBab : String) : void
+    + getBab() : List<Bab>
+    + tersedia() : boolean
+    + kurangiStok() : void
+    + tambahStok() : void
+    + getNomorInduk() : String
+    + getJudul() : String
+    + getJumlahEksemplar() : int
+    + toString() : String
+  }
+
+  class Bab {
+    - nomor : int
+    - judul : String
+    - Bab(nomor : int, judul : String)
+    + getNomor() : int
+    + getJudul() : String
+    + toString() : String
+  }
+
+  class Jurusan {
+    - kode : String
+    - nama : String
+    - mahasiswa : List<Mahasiswa>
+    + Jurusan(kode : String, nama : String)
+    + daftarkan(m : Mahasiswa) : void
+    + keluarkan(m : Mahasiswa) : void
+    + getMahasiswa() : List<Mahasiswa>
+    + getNama() : String
+    + toString() : String
+  }
+
+  class Mahasiswa {
+    - nim : String
+    - nama : String
+    + Mahasiswa(nim : String, nama : String)
+    + getNim() : String
+    + getNama() : String
+    + toString() : String
+  }
+
+  note right of Bab
+    Komposisi:
+    - nested class di Java
+    - constructor private
+    - dibuat oleh Buku
+    - tidak bermakna tanpa Buku
+  end note
+
+  note right of Mahasiswa
+    Agregasi:
+    - constructor public
+    - dibuat dari luar Jurusan
+    - tetap hidup setelah dikeluarkan
+  end note
+
+  Buku "1" *-- "0..*" Bab : memiliki
+  Jurusan "1" o-- "0..*" Mahasiswa : menaungi
+}
+
+package service {
+  class PerpustakaanService {
+    - koleksi : List<Buku>
+    + tambahKoleksi(buku : Buku) : void
+    + cariKoleksi(nomorInduk : String) : Buku
+    + pinjam(nomorAnggota : String, nomorInduk : String) : void
+    + kembalikan(nomorAnggota : String, nomorInduk : String) : void
+  }
+
+  PerpustakaanService "1" o-- "0..*" Buku : menyimpan referensi
+}
+
+note "Diagram ini memakai nama kelas konseptual yang sama untuk Java dan PHP.\nJava merealisasikan Bab dan Mahasiswa sebagai nested class.\nPHP memakai class Bab dan Mahasiswa terpisah; pembuatan Bab dijaga melalui konvensi." as N1
+N1 .. PerpustakaanService
+
+@enduml
