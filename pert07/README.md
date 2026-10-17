@@ -109,7 +109,10 @@ konvensi: hanya `Buku::tambahBab()` yang digunakan untuk membuat `Bab`.
 
 ### Running Java After
 
+**Sebelum PerpustakaanService dimasukkan**
 ![Hasil Screenshot Java](./images/getBabAfter.png)
+**Setelah PerpustakaanService dimasukkan ke Main.java**
+![Hasil Screenshot Java](./images/runJavaAfterPerpustakaan.png)
 
 ### Code Java After
 
@@ -118,6 +121,8 @@ konvensi: hanya `Buku::tambahBab()` yang digunakan untuk membuat `Bab`.
 ## ![Hasil Screenshot Java](./images/bukuJavaAfter2.png)
 
 ## ![Hasil Screenshot Java](./images/codeMainJava.png)
+
+## ![Hasil Screenshot Java](./images/mainJavaPerpustakaan.png)
 
 ## ![Hasil Screenshot Java](./images/jurusanJavaAfter.png)
 
