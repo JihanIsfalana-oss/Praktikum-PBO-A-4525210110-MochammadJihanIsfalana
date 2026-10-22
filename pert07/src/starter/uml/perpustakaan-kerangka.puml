@@ -1,0 +1,64 @@
+@startuml perpustakaan-class
+title Sistem Perpustakaan — Class Diagram (Sesi 7)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+' ─────────────────────────────────────────────────────────────
+' KERANGKA. Lengkapi setiap bagian bertanda TODO.
+' Setiap kelas di sini harus ada di kode Anda, dan sebaliknya.
+' ─────────────────────────────────────────────────────────────
+
+package model {
+
+  abstract class Koleksi {
+    - nomorInduk : String
+    - judul : String
+    - penulis : String
+    - tahun : int
+    - jumlahEksemplar : int
+    + {abstract} masaPinjamHari() : int
+    + {abstract} bolehDipinjam() : boolean
+    + tersedia() : boolean
+  }
+
+  ' TODO 1: tambahkan tiga turunan Koleksi — Buku, Majalah, Skripsi.
+  '         Perhatikan masa pinjam masing-masing.
+
+  class Bab {
+    - nomor : int
+    - judul : String
+  }
+
+  ' TODO 2: tambahkan kelas Anggota dan Peminjaman beserta atributnya.
+
+  ' TODO 3: tambahkan enum StatusKoleksi dan enum/kelas JenisKeanggotaan.
+
+  ' ── RELASI ───────────────────────────────────────────────
+  ' TODO 4: lengkapi relasi berikut. Untuk setiap relasi, tentukan
+  '         derajat keterikatannya DAN tulis multiplicity di kedua ujung.
+  '
+  '   Notasi:  *--  komposisi   o--  agregasi   -->  asosiasi   ..>  dependensi
+  '
+  ' Buku ? Bab                 -> pikirkan: bab bisa hidup tanpa buku?
+  ' Anggota ? Peminjaman       -> pikirkan: peminjaman bisa hidup tanpa anggota?
+  ' Peminjaman ? Koleksi       -> pikirkan: koleksi bisa hidup tanpa peminjaman?
+
+  Koleksi <|-- Bab : ' TODO 5: relasi ini SALAH. Perbaiki.
+
+}
+
+package service {
+  class PerpustakaanService {
+    + tambahKoleksi(k : Koleksi) : void
+    + daftarkanAnggota(a : Anggota) : void
+    + pinjam(nomorAnggota : String, nomorInduk : String) : Peminjaman
+    + kembalikan(nomorAnggota : String, nomorInduk : String) : void
+    + cariKoleksi(nomorInduk : String) : Koleksi
+  }
+
+  ' TODO 6: tambahkan relasi antara PerpustakaanService dengan Koleksi
+  '         dan Anggota. Agregasi atau komposisi? Beri alasannya di analisis.md.
+}
+
+@enduml

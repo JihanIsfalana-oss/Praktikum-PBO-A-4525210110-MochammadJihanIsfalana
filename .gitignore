@@ -1,0 +1,54 @@
+# ====================================================================
+# Gitignore untuk Praktikum PBO A - Mochammad Jihan Isfalana (4525210110)
+# ====================================================================
+
+# OS hasil generate / Cache lokal
+# --------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+Thonubs.db
+ehthumbs.db
+Icon?
+
+# Java - Hasil Kompilasi (Compiled files)
+# --------------------------------------------------------------------
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Folder Build (Jika melakukan compile manual/otomatis)
+bin/
+build/
+out/
+target/
+dist/
+
+# IDE / Editor Configs
+# --------------------------------------------------------------------
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# PHP / NodeJS Dependencies 
+# --------------------------------------------------------------------
+vendor/
+node_modules/
+
+# File Konfigurasi Rahasia / Environment Lokal
+# --------------------------------------------------------------------
+.env
+.env.local
+database.php
+config.local.php
