@@ -1,0 +1,110 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam linetype ortho
+hide empty members
+
+package "com.sewakos.app" {
+  class Main {
+    +main(args: String[]): void
+    -jalankanMenu(scanner: Scanner, manajemen: ManajemenKos): void
+    -prosesSewa(scanner: Scanner, manajemen: ManajemenKos): void
+    -prosesPembayaran(scanner: Scanner, manajemen: ManajemenKos): void
+  }
+}
+
+package "com.sewakos.service" {
+  class ManajemenKos {
+    -daftarKamar: List<Kamar>
+    -daftarSewa: List<SewaKos>
+    -daftarPengguna: List<PenggunaKos>
+    +ManajemenKos()
+    +buatSewa(...): SewaKos
+    +cariSewa(idSewa: String): SewaKos
+    +tampilkanKamar(): void
+    +tampilkanSewa(): void
+    +tampilkanPengguna(): void
+  }
+}
+
+package "com.sewakos.model" {
+  abstract class PenggunaKos {
+    -nama: String
+    -noTelepon: String
+    #PenggunaKos(nama: String, noTelepon: String)
+    +getNama(): String
+    +getNoTelepon(): String
+    {abstract} +getPeran(): String
+    {abstract} +tampilkanInfo(): void
+  }
+
+  class Penyewa {
+    -nomorIdentitas: String
+    +Penyewa(nama, noTelepon, nomorIdentitas)
+    +getNomorIdentitas(): String
+    +getPeran(): String
+    +tampilkanInfo(): void
+  }
+
+  class Pengelola {
+    -kodePengelola: String
+    +Pengelola(nama, noTelepon, kodePengelola)
+    +getKodePengelola(): String
+    +getPeran(): String
+    +tampilkanInfo(): void
+  }
+
+  class Kamar {
+    {static} +MIN_HARGA_PER_BULAN: double = 100000
+    {static} -jumlahKamar: int
+    -nomorKamar: String
+    -hargaPerBulan: double
+    -status: StatusKamar
+    +Kamar(nomorKamar, hargaPerBulan)
+    +tandaiTerisi(): void
+    {static} +getJumlahKamar(): int
+  }
+
+  interface DapatDibayar {
+    +hitungTotal(): double
+    +bayar(nominal: double): void
+  }
+
+  class SewaKos {
+    {static} +BIAYA_ADMIN: double = 50000
+    {static} +MAX_LAMA_SEWA_BULAN: int = 24
+    {static} -urutanSewa: int
+    -idSewa: String
+    -penyewa: Penyewa
+    -kamar: Kamar
+    -lamaBulan: int
+    -statusPembayaran: StatusPembayaran
+    +SewaKos(penyewa, kamar, lamaBulan)
+    +hitungTotal(): double
+    +bayar(nominal: double): void
+  }
+
+  enum StatusKamar {
+    TERSEDIA
+    TERISI
+  }
+
+  enum StatusPembayaran {
+    BELUM_BAYAR
+    LUNAS
+  }
+}
+
+PenggunaKos <|-- Penyewa
+PenggunaKos <|-- Pengelola
+DapatDibayar <|.. SewaKos
+ManajemenKos "1" o-- "0..*" Kamar : mengelola
+ManajemenKos "1" o-- "0..*" SewaKos : menyimpan
+ManajemenKos "1" o-- "0..*" PenggunaKos : mendata
+SewaKos "0..*" --> "1" Penyewa : penyewa
+SewaKos "0..*" --> "1" Kamar : kamar
+Kamar --> StatusKamar : status
+SewaKos --> StatusPembayaran : status pembayaran
+Main ..> ManajemenKos : menggunakan
+@enduml
