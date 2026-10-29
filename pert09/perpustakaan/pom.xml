@@ -20,10 +20,17 @@
 
   <dependencies>
     <dependency>
+    <!-- Unit Testing -->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <!-- Data Faking -->
+    <dependency>
+      <groupId>net.datafaker</groupId>
+      <artifactId>datafaker</artifactId>
+      <version>2.7.0</version>
     </dependency>
   </dependencies>
 

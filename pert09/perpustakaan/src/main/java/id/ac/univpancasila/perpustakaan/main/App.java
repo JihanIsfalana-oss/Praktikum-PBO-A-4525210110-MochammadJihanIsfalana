@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 import id.ac.univpancasila.perpustakaan.model.Anggota;
 import id.ac.univpancasila.perpustakaan.service.PerpustakaanService;
+import net.datafaker.Faker;
 
 /**
  * Kompilasi dari folder sesi-07/java:
@@ -15,6 +16,8 @@ import id.ac.univpancasila.perpustakaan.service.PerpustakaanService;
  */
 public class App {
     public static void main(String[] args) {
+
+        Faker faker = new Faker();
 
         System.out.println("=== Komposisi: Buku memiliki Bab ===");
         Buku buku = new Buku("PBO-001", "Pemrograman Berorientasi Objek", "A. W. Pribadi", 3);
@@ -39,10 +42,12 @@ public class App {
         System.out.println("=== Agregasi: Jurusan menaungi Mahasiswa ===");
         Jurusan.Mahasiswa ani = new Jurusan.Mahasiswa("2024001", "Ani Lestari");
         Jurusan.Mahasiswa budi = new Jurusan.Mahasiswa("2024002", "Budi Santoso");
+        Jurusan.Mahasiswa mhsEngineering = new Jurusan.Mahasiswa("2024003", faker.name().fullName());
 
         Jurusan informatika = new Jurusan("TI", "Teknik Informatika");
         informatika.daftarkan(ani);
         informatika.daftarkan(budi);
+        informatika.daftarkan(mhsEngineering);
         System.out.println("  " + informatika);
 
         informatika.keluarkan(budi);
@@ -73,18 +78,24 @@ public class App {
         System.out.println("=== Agregasi: Anggota Jurusan ===");
         Anggota anggota1 = new Anggota("TI", "Informatika", "2024001");
         Anggota anggota2 = new Anggota("TI", "Informatika", "2024002");
+        Anggota anggota3 = new Anggota("TI", informatika.getNama(), "2024003");
         anggota1.daftarkan(budi, LocalDateTime.now().minusYears(4).minusMonths(2));
         anggota2.daftarkan(ani, LocalDateTime.now().minusDays(10));
+        anggota3.daftarkan(mhsEngineering, LocalDateTime.now().minusMonths(6));
         System.out.println();
         System.out.println("  Setelah pendaftaran anggota:");
         anggota1.getKeanggotaan();
         anggota2.getKeanggotaan();
+        anggota3.getKeanggotaan();
         System.out.println();
         System.out.println("  Masa keanggotaan:");
         System.out.println(anggota1.checkMasaKeanggotaan());
         System.out.println();
         System.out.println("  Masa keanggotaan:");
         System.out.println(anggota2.checkMasaKeanggotaan());
+        System.out.println();
+        System.out.println("  Masa keanggotaan:");
+        System.out.println(anggota3.checkMasaKeanggotaan());
     }
 }
 
