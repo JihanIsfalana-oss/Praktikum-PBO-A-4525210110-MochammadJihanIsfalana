@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 import id.ac.univpancasila.perpustakaan.model.Anggota;
 import id.ac.univpancasila.perpustakaan.service.PerpustakaanService;
+import id.ac.univpancasila.perpustakaan.util.Format;
 import net.datafaker.Faker;
 
 /**
@@ -63,6 +64,7 @@ public class App {
         perpustakaan.tambahKoleksi(new Buku("PBO-001", "Pemrograman Berorientasi Objek", "A. W. Pribadi", 3));
         perpustakaan.tambahKoleksi(new Buku("PBO-002", "Pemrograman Berorientasi Objek Lanjut", "A. W. Pribadi", 4));
         perpustakaan.tambahKoleksi(new Buku("DB-001", "Basis Data", "Moch. Jihan Isfalana", 2));
+        System.out.println("  Contoh format rupiah: " + Format.rupiah(150000));
 
         System.out.println();
         System.out.println("  Meminjam buku PBO-001...");
@@ -98,4 +100,3 @@ public class App {
         System.out.println(anggota3.checkMasaKeanggotaan());
     }
 }
-
