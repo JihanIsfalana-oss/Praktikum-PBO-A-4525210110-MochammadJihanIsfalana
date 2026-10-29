@@ -1,0 +1,24 @@
+# ── Java / Maven ─────────────────────────────────────
+*.class
+target/
+*.jar
+
+# ── PHP / Composer ───────────────────────────────────
+/vendor/
+.phpunit.result.cache
+.phpunit.cache/
+
+# CATATAN: composer.lock TIDAK ada di daftar ini — memang HARUS di-commit.
+
+# ── IDE dan OS ───────────────────────────────────────
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+.DS_Store
+Thumbs.db
+
+# ── Hasil render PlantUML ────────────────────────────
+**/out/uml/

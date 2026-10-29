@@ -1,0 +1,19 @@
+{
+    "name": "univpancasila/perpustakaan",
+    "description": "Praktikum PBO sesi 9 — Informatika UP",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {}
+    },
+    "autoload-dev": {
+        "psr-4": {}
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,59 @@
+STRUKTUR FOLDER BAKU MAVEN
+==========================
+
+Hafalkan struktur ini. Spring Boot pada sesi 14 memakai yang SAMA PERSIS.
+
+sesi-09/java/
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   ├── java/                        <- kode program
+│   │   │   └── id/ac/univpancasila/perpustakaan/
+│   │   │       ├── App.java
+│   │   │       ├── model/
+│   │   │       │   ├── Buku.java
+│   │   │       │   ├── Anggota.java
+│   │   │       │   └── Peminjaman.java
+│   │   │       ├── service/
+│   │   │       │   └── PerpustakaanService.java
+│   │   │       └── util/
+│   │   │           └── Format.java
+│   │   └── resources/                   <- berkas konfigurasi
+│   └── test/
+│       └── java/                        <- kode pengujian (dipakai sesi 11)
+└── target/                              <- HASIL kompilasi, JANGAN di-commit
+
+
+ATURAN YANG WAJIB DIPATUHI
+--------------------------
+
+Baris `package` di setiap berkas HARUS sama persis dengan jalur foldernya.
+
+    src/main/java/id/ac/univpancasila/perpustakaan/model/Buku.java
+                  └──────────────┬───────────────────────┘
+                                 v
+    package id.ac.univpancasila.perpustakaan.model;
+
+Ini bukan konvensi yang boleh dilanggar — ini aturan bahasa. Ketidakcocokan
+menghasilkan ClassNotFoundException saat program dijalankan.
+
+
+PERINTAH MAVEN YANG PALING SERING DIPAKAI
+-----------------------------------------
+
+  mvn clean              hapus folder target/
+  mvn compile            kompilasi saja
+  mvn test               kompilasi + jalankan pengujian
+  mvn package            hasilkan berkas .jar di target/
+  mvn dependency:tree    lihat pohon dependensi
+  mvn exec:java -Dexec.mainClass=<nama kelas lengkap>
+
+
+TUGAS ANDA
+----------
+
+1. Bentuk struktur folder di atas di dalam sesi-09/java/.
+2. Pindahkan kode Sistem Perpustakaan dari sesi 7 ke dalamnya.
+3. Tambahkan baris `package` yang benar di setiap berkas.
+4. Tambahkan `import` untuk kelas antar-package.
+5. Pastikan `mvn clean compile` menghasilkan BUILD SUCCESS.

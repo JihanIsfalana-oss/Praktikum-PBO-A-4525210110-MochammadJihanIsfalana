@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+    Koordinat proyek: groupId + artifactId + version = alamat unik proyek Anda.
+
+    TODO 1: isi groupId dengan konvensi domain terbalik universitas,
+            yaitu id.ac.univpancasila.perpustakaan
+    TODO 2: isi artifactId dengan nama proyek, mis. perpustakaan
+    TODO 3: isi version, mis. 1.0.0
+  -->
+  <groupId>TODO</groupId>
+  <artifactId>TODO</artifactId>
+  <version>TODO</version>
+  <packaging>jar</packaging>
+
+  <name>Sistem Perpustakaan</name>
+  <description>Praktikum PBO sesi 9 — Informatika UP</description>
+
+  <properties>
+    <!-- TODO 4: setel ke 25 (Java 25 LTS). -->
+    <maven.compiler.release>TODO</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!--
+      TODO 5: tambahkan SATU dependensi eksternal yang benar-benar Anda pakai.
+              Cari di https://central.sonatype.com
+              Dependensi yang ditambahkan tetapi tidak dipakai tidak dinilai.
+    -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!--
+        Plugin exec agar bisa menjalankan program dengan:
+            mvn exec:java -Dexec.mainClass=id.ac.univpancasila.perpustakaan.App
+      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
