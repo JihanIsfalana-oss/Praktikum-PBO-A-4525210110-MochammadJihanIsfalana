@@ -30,6 +30,9 @@ disempurnakan pada sesi berikutnya.
 - Mahasiswa `null` tidak boleh didaftarkan pada versi Java.
 - Mahasiswa yang dikeluarkan dari jurusan tetap hidup sebagai objek di luar
   jurusan.
+- Nomor induk buku tidak boleh didaftarkan lebih dari satu kali pada service.
+- Satu anggota tidak boleh memiliki pinjaman aktif yang sama lebih dari satu.
+- Pengembalian hanya boleh dilakukan untuk pinjaman yang masih tercatat aktif.
 - Peminjaman hanya mengurangi stok buku yang ditemukan; pengembalian hanya
   menambah stok buku yang ditemukan.
 
@@ -61,6 +64,8 @@ disempurnakan pada sesi berikutnya.
   pada `PerpustakaanService`.
 - **meminjam dan mengembalikan** menjadi `pinjam()` dan `kembalikan()` pada
   `PerpustakaanService`.
+- **menampilkan koleksi** menjadi `getKoleksi()` yang mengembalikan salinan
+  tak dapat diubah.
 
 ## Keputusan Relasi
 

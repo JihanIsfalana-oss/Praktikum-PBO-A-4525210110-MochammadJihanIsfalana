@@ -76,7 +76,9 @@ package model {
 package service {
   class PerpustakaanService {
     - koleksi : List<Buku>
+    - peminjamanAktif : Set<String>
     + tambahKoleksi(buku : Buku) : void
+    + getKoleksi() : List<Buku>
     + cariKoleksi(nomorInduk : String) : Buku
     + pinjam(nomorAnggota : String, nomorInduk : String) : void
     + kembalikan(nomorAnggota : String, nomorInduk : String) : void
