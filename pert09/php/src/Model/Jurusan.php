@@ -1,8 +1,6 @@
 <?php
 namespace Perpustakaan\Model;
 
-use Perpustakaan\Model\Mahasiswa;
-
 class Jurusan
 {
     /** @var Mahasiswa[] */
@@ -13,13 +11,17 @@ class Jurusan
         private readonly string $nama,
     ) {}
 
-    /** TODO 5: terima objek dari luar (agregasi). Jangan menambahkan duplikat. */
-    public function daftarkan(Mahasiswa $m): void {
-        array_push($this->mahasiswa, $m);
+    public function daftarkan(Mahasiswa $m): void
+    {
+        if (in_array($m, $this->mahasiswa, true)) {
+            return;
+        }
+
+        $this->mahasiswa[] = $m;
     }
 
-    /** TODO 6: lepaskan dari jurusan. Objeknya tetap hidup. */
-    public function keluarkan(Mahasiswa $m): void {
+    public function keluarkan(Mahasiswa $m): void
+    {
         $key = array_search($m, $this->mahasiswa, true);
         if ($key !== false) {
             unset($this->mahasiswa[$key]);
@@ -27,16 +29,21 @@ class Jurusan
         }
     }
 
-    public function getNama(): string{
+    public function getNama(): string
+    {
         return $this->nama;
     }
 
-    public function getKode(): string{
+    public function getKode(): string
+    {
         return $this->kode;
     }
 
     /** @return Mahasiswa[] */
-    public function getMahasiswa(): array { return $this->mahasiswa; }
+    public function getMahasiswa(): array
+    {
+        return $this->mahasiswa;
+    }
 
     public function __toString(): string
     {

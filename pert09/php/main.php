@@ -34,16 +34,21 @@ echo '  Budi tetap ada sebagai objek: ', $budi, PHP_EOL;
 echo PHP_EOL;
 echo "========== Perpustakaan Teknik =============", PHP_EOL;
 $perpus = new PerpustakaanService();
-$perpus->tambahKoleksi(new Buku("PBO-001", "Pemrograman Berorientasi Objek", "A. W. Pribadi", 3));
+$perpus->tambahKoleksi($buku);
 
 $hasilPencarian = $perpus->cariKoleksi("PBO-001");
 echo "Hasil Pencarian buku anda: ", $hasilPencarian, PHP_EOL;
+echo "Stok sebelum dipinjam: ", $hasilPencarian->getJumlahEksemplar(), PHP_EOL;
 $perpus->pinjam("IT-4554", "PBO-001");
+echo "Stok setelah dipinjam: ", $hasilPencarian->getJumlahEksemplar(), PHP_EOL;
 $perpus->kembalikan("IT-4554", "PBO-001");
+echo "Stok setelah dikembalikan: ", $hasilPencarian->getJumlahEksemplar(), PHP_EOL;
 
 echo PHP_EOL;
 echo "========== Keanggotaan Perpustakaan Teknik =============", PHP_EOL;
 $date = Carbon::now();
+$tanggalJatuhTempo = $date->copy()->addDays(14);
+echo "Tanggal jatuh tempo (14 hari): ", $tanggalJatuhTempo->format('d-m-Y'), PHP_EOL;
 $anggota1 = new Anggota("IT", $informatika->getNama(), "045");
 $anggota1->daftarkanAnggota($budi, $date);
 $anggota1->getKeanggotaan();

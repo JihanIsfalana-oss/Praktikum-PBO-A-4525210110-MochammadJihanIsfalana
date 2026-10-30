@@ -1,216 +1,158 @@
-# Praktikum Sesi 9 — Package, Namespace, dan Build Tool
+# **Pertemuan 09 - Praktikum Pemrograman Berorientasi Objek (PBO)**
 
-**Sub-CPMK-P6 — Mahasiswa mampu menstrukturkan proyek dengan package/namespace serta mengelola dependensi menggunakan Maven dan Composer. (P3)**
+## Biodata Mahasiswa
 
-**Keterkaitan teori:** Pertemuan 9 — Package, Namespace, dan Build Tool  
-**Durasi:** 170 menit (1 SKS praktikum) · **Bobot:** 5% dari nilai praktikum  
-**Bahasa:** Java 25 dan PHP 8.4+
+- **Nama**: Mochammad Jihan Isfalana
+- **NIM**: 4525210110
+- **Kelas**: Praktikum PBO A
 
-> Versi cetak modul ini: [`Modul-Praktikum-09-package-namespace-dan-build-tool.docx`](Modul-Praktikum-09-package-namespace-dan-build-tool.docx). Kerangka kode: [`starter/`](starter/).
+## Mata Kuliah dan Dosen
+
+- **Mata Kuliah**: Pemrograman Berorientasi Objek
+- **Dosen Pengampu**: Adi Wahyu Pribadi, S.Si., M.Kom.
 
 ---
 
-## A. Tujuan sesi
+## Tugas Pertemuan 09
 
-1. Merestrukturisasi proyek datar menjadi proyek Maven dan proyek Composer yang benar.
-2. Menerapkan penamaan package domain terbalik dan autoload PSR-4.
-3. Menambahkan dan memakai satu dependensi eksternal pada masing-masing proyek.
-4. Memastikan tidak ada satu pun artefak build yang ter-commit.
+**Materi**: Package, namespace, dan build tool menggunakan Maven untuk Java
+serta Composer dan PSR-4 untuk PHP.
 
-## B. Alat dan bahan
+Tugas yang dikerjakan:
 
-- Maven 3.9+ dan Composer 2.x (hasil sesi 1).
-- Kode Sistem Perpustakaan dari sesi 7 — inilah yang akan direstrukturisasi.
-- Akses internet untuk mengunduh dependensi. Jika lab tidak punya akses, gunakan cermin lokal yang disediakan asisten.
+1. Menata proyek Java ke dalam struktur Maven dan package domain terbalik.
+2. Mengelola dependensi Java melalui `pom.xml`, termasuk Datafaker.
+3. Menata proyek PHP dalam namespace `Perpustakaan` dan memuat kelas melalui
+   autoload PSR-4 Composer.
+4. Menggunakan Carbon sebagai dependensi eksternal PHP untuk mengolah tanggal.
+5. Menjalankan dan memvalidasi proyek Java dan PHP.
 
-## C. Berkas starter
+---
 
-Salin ke folder tugas Anda; **jangan** menyunting berkas aslinya. Setiap komentar `TODO` harus Anda lengkapi sendiri — kode yang disalin dari sumber lain akan terlihat pada sesi demo.
+## Pengerjaan Tugas, Penjelasan, dan Hasil
 
-| Berkas | Keterangan |
-|---|---|
-| `starter/java/pom.xml` | pom.xml dengan TODO pada groupId, artifactId, dan dependensi. |
-| `starter/java/struktur.txt` | Peta struktur folder Maven yang harus Anda bentuk. |
-| `starter/php/composer.json` | composer.json dengan TODO pada autoload PSR-4. |
-| `starter/.gitignore` | Versi lengkap termasuk target/ dan vendor/. |
+### 1. Konfigurasi Build Tool
 
-## D. Langkah kerja
+#### Java — Maven
 
-Kerjakan berurutan. Jangan melanjutkan ke langkah berikutnya sebelum checkpoint terpenuhi.
+File `perpustakaan/pom.xml` menetapkan koordinat proyek, versi compiler Java,
+dependensi JUnit untuk pengujian, Datafaker untuk membuat nama contoh, dan
+konfigurasi `exec-maven-plugin` untuk menjalankan class utama.
 
-### Langkah 1 — Membentuk struktur folder Maven
+- Sebelum konfigurasi: [pom.xml sebelum](./images/pom-xml-before.png)
+- Sesudah konfigurasi: [pom.xml sesudah](./images/pom-xml-after.png)
 
-- Buat folder sesi-09/java/ dan di dalamnya bentuk struktur baku Maven. Hafalkan struktur ini — Spring Boot pada sesi 14 memakai yang sama persis.
-- Pindahkan kode Perpustakaan dari sesi 7 ke dalam src/main/java/, dengan package id.ac.univpancasila.perpustakaan dan sub-package model, service, exception.
-- Nama package HARUS sama persis dengan jalur foldernya. Ini bukan konvensi, melainkan aturan bahasa.
+#### PHP — Composer
 
-**Struktur folder**
+File `php/composer.json` menetapkan kebutuhan PHP dan Carbon. Pemetaan
+`Perpustakaan\\` ke `src/` mengaktifkan PSR-4, sedangkan pemetaan
+`Perpustakaan\\Tests\\` disiapkan untuk kode pengujian.
 
-```
-sesi-09/java/
-├── pom.xml
-└── src/main/java/id/ac/univpancasila/perpustakaan/
-    ├── App.java
-    ├── model/     (Buku.java, Anggota.java, Peminjaman.java)
-    └── service/   (LibraryService.java)
-```
+- [composer.json sesudah](./images/composer-after.png)
 
-> **Checkpoint —** Setiap berkas .java diawali baris package yang cocok dengan lokasinya.
+### 2. Struktur dan Implementasi
 
-### Langkah 2 — Melengkapi pom.xml dan membangun proyek
+#### Java
 
-- Lengkapi TODO pada pom.xml: groupId, artifactId, versi, dan maven.compiler.release.
-- Bangun proyek dan jalankan.
+Proyek Maven berada di folder `perpustakaan/`. Kode aplikasi dikelompokkan
+dengan package `id.ac.univpancasila.perpustakaan`, yang memiliki sub-package
+`main`, `model`, `service`, dan `util`. Struktur package tersebut mengikuti
+lokasi file di `src/main/java`.
 
-**Terminal**
+| Bagian | Penjelasan |
+| --- | --- |
+| `main/App.java` | Menjalankan demonstrasi model dan layanan perpustakaan. |
+| `model/` | Berisi model buku, anggota, mahasiswa, dan jurusan. |
+| `service/PerpustakaanService.java` | Menyediakan koleksi buku, pencarian, serta proses peminjaman dan pengembalian. |
+| `util/Format.java` | Menyediakan format nilai rupiah. |
+| `pom.xml` | Mengatur identitas proyek, dependensi, versi Java, dan plugin Maven. |
 
-```bash
-cd sesi-09/java
-mvn clean compile
-mvn exec:java -Dexec.mainClass=id.ac.univpancasila.perpustakaan.App
-```
+#### PHP
 
-> **Checkpoint —** BUILD SUCCESS, dan program berjalan dari folder target/classes.
+Proyek Composer berada di folder `php/`. Kelas-kelas dalam `src/Model` dan
+`src/Service` menggunakan namespace `Perpustakaan\\Model` dan
+`Perpustakaan\\Service`. Titik masuk `main.php` hanya memerlukan
+`vendor/autoload.php` Composer memuat kelas aplikasi berdasarkan PSR-4.
 
-### Langkah 3 — Menambahkan dependensi eksternal (Java)
+| File | Penjelasan |
+| --- | --- |
+| `src/Model/Buku.php` | Menyimpan informasi buku dan bab, memvalidasi stok, serta menjaga stok agar tidak negatif. |
+| `src/Model/Bab.php` | Mewakili bab yang dibuat melalui `Buku::tambahBab()`. |
+| `src/Model/Jurusan.php` | Mengelola daftar mahasiswa dan mencegah mahasiswa yang sama didaftarkan berulang kali. |
+| `src/Model/Anggota.php` | Mengelola data anggota serta memeriksa masa keanggotaan menggunakan Carbon. |
+| `src/Service/PerpustakaanService.php` | Mengelola koleksi, peminjaman, dan pengembalian buku beserta stoknya. |
+| `composer.json` dan `composer.lock` | Menetapkan autoload PSR-4, kebutuhan PHP, serta versi dependensi yang terpasang. |
+| `main.php` | Menjalankan demonstrasi relasi, layanan, stok, dan tanggal jatuh tempo. |
 
-- Tambahkan satu dependensi yang benar-benar Anda pakai. Saran: sebuah pustaka kecil untuk format tabel di terminal, atau pustaka tanggal.
-- Setelah menambah dependensi, jalankan mvn dependency:tree dan simpan keluarannya ke sesi-09/dependency-tree.txt.
-- Pakai minimal satu fungsi dari pustaka itu di dalam App.java. Dependensi yang ditambahkan tetapi tidak dipakai tidak dinilai.
+### 3. Cara Menjalankan
 
-**Terminal**
+Pastikan Java/JDK 25, Maven, PHP 8.5.12 atau lebih baru yang sesuai dengan
+constraint proyek, dan Composer tersedia di terminal.
 
-```bash
-mvn dependency:tree > ../dependency-tree.txt
-mvn clean compile
-```
+#### Java
 
-> **Checkpoint —** dependency-tree.txt menampilkan pustaka yang Anda tambahkan, dan App.java benar-benar memanggilnya.
-
-### Langkah 4 — Membentuk proyek Composer dengan autoload PSR-4
-
-- Buat sesi-09/php/ dengan struktur src/Model/, src/Service/, src/Exception/.
-- Lengkapi TODO pada composer.json: pemetaan namespace Perpustakaan\ ke src/.
-- Hapus SELURUH require_once dari kode Anda. Setelah PSR-4 aktif, satu baris require vendor/autoload.php di titik masuk sudah cukup.
-
-**Terminal**
+Dari root repositori:
 
 ```bash
-cd ../php
+cd pert09/perpustakaan
+mvn clean
+mvn compile
+mvn exec:java
+```
+
+Hasil perintah Maven:
+
+- [mvn clean](./images/mvn-clean.png)
+- [mvn compile](./images/mvn-compile.png)
+- [mvn exec:java](./images/mvn-exec-java.png)
+
+#### PHP
+
+Dari root repositori:
+
+```bash
+cd pert09/php
 composer install
 php main.php
 ```
 
-> **Checkpoint —** Program berjalan tanpa satu pun require_once selain vendor/autoload.php.
+`composer install` memasang versi dependensi sesuai `composer.lock` dan
+membangun autoloader. Hasil menjalankan aplikasi:
 
-### Langkah 5 — Menambahkan dependensi eksternal (PHP)
+- [php main.php](./images/php-run.png)
 
-- Tambahkan satu dependensi dan pakai fungsinya. Saran: nesbot/carbon untuk pengelolaan tanggal peminjaman dan jatuh tempo.
-- Perhatikan berkas composer.lock yang terbentuk. Bacalah beberapa barisnya.
+### 4. Hasil Pengujian
 
-**Terminal**
+Program Java berhasil dibersihkan, dikompilasi, dan dijalankan melalui Maven.
+Demonstrasi Java menampilkan relasi buku-bab, agregasi jurusan-mahasiswa,
+format rupiah, serta perubahan stok ketika buku dipinjam dan dikembalikan.
 
-```bash
-composer require nesbot/carbon
-php main.php
-```
+Konfigurasi Composer valid, semua berkas PHP lolos pemeriksaan sintaks, dan
+aplikasi PHP berhasil dijalankan. Demonstrasi PHP menampilkan bab buku,
+agregasi mahasiswa, stok sebelum dan sesudah peminjaman, tanggal jatuh tempo
+14 hari menggunakan Carbon, serta status keanggotaan.
 
-> **Checkpoint —** Tanggal jatuh tempo dihitung memakai pustaka eksternal, bukan aritmetika manual.
+### 5. Keputusan Desain
 
-### Langkah 6 — Percobaan: merusak pemetaan namespace
-
-- Buat sesi-09/percobaan.md.
-- Ubah namespace satu kelas dari Perpustakaan\Model menjadi Perpustakaan\Domain TANPA memindahkan berkasnya. Jalankan. Catat pesan kesalahannya.
-- Lalu perbaiki dengan memindahkan berkas ke folder yang sesuai. Catat langkah perbaikannya.
-- Lakukan hal serupa pada Java: ubah baris package satu kelas tanpa memindahkan berkas. Catat pesan kompilatornya.
-
-> **Checkpoint —** percobaan.md memuat dua pesan kesalahan asli beserta langkah perbaikannya.
-
-### Langkah 7 — Memastikan repositori bersih
-
-- Perbarui .gitignore dengan versi lengkap dari starter.
-- Jalankan git status. Folder target/ dan vendor/ TIDAK boleh muncul.
-- Jika sebelumnya sudah terlanjur ter-commit, bersihkan dengan git rm -r --cached.
-- composer.lock WAJIB di-commit. Jelaskan alasannya di percobaan.md.
-
-**Terminal**
-
-```bash
-git status
-git add .
-git commit -m "Sesi 9: restrukturisasi Maven dan Composer"
-git push
-```
-
-> **Checkpoint —** Repositori daring tidak memuat target/ maupun vendor/, tetapi memuat composer.lock.
-
-## E. Latihan mandiri di lab
-
-_Dikerjakan bila langkah kerja selesai lebih awal. Tidak wajib, tetapi menambah nilai pada aspek penerapan konsep._
-
-1. Ubah versi dependensi PHP Anda dari ^2.0 menjadi ~2.0. Jalankan composer update dan amati perbedaannya di composer.lock.
-2. Buat sub-package util berisi satu kelas utilitas format rupiah, lalu pakai dari App. Perhatikan baris import/use yang muncul.
-
-## F. Tugas rumah
-
-1. Restrukturisasi SELURUH kode Anda dari sesi 2 sampai 7 ke dalam kedua proyek ini. Setelah sesi 9, hanya struktur inilah yang dipakai sampai akhir semester.
-2. Tulis sesi-09/README.md berisi cara membangun dan menjalankan kedua proyek, seolah-olah ditujukan untuk orang yang belum pernah melihat proyek Anda.
-
-## G. Luaran yang dikumpulkan
-
-Seluruh luaran diserahkan melalui repositori Git pribadi Anda, dengan riwayat commit yang menunjukkan proses pengerjaan — bukan satu commit tunggal di akhir.
-
-| Berkas / folder | Keterangan |
-|---|---|
-| `sesi-09/java/` | Proyek Maven lengkap dengan pom.xml dan struktur src/main/java. |
-| `sesi-09/php/` | Proyek Composer dengan composer.json, composer.lock, dan autoload PSR-4. |
-| `sesi-09/dependency-tree.txt` | Keluaran mvn dependency:tree. |
-| `sesi-09/percobaan.md` | Dua percobaan merusak pemetaan namespace/package beserta perbaikannya. |
-| `sesi-09/README.md` | Petunjuk membangun dan menjalankan. |
-
-## H. Rubrik penilaian sesi ini
-
-| Aspek | Bobot | Kriteria |
-|---|---|---|
-| Kebenaran fungsional | 35% | Seluruh perintah pada langkah kerja berjalan dan menghasilkan keluaran yang diminta. |
-| Penerapan konsep sesi ini | 30% | Konsep yang menjadi Sub-CPMK sesi ini diterapkan dengan tepat, bukan sekadar membuat program berjalan. |
-| Keterbacaan dan konvensi | 10% | Penamaan bermakna, format konsisten, komentar seperlunya, riwayat commit wajar. |
-| Demo dan pertanyaan lisan | 25% | Mampu menjelaskan setiap baris kode sendiri dan menjawab pertanyaan demo. MENGGUGURKAN: tanpa demo, tugas tidak dinilai. |
-
-## I. Pertanyaan demo
-
-> Pertanyaan berikut akan diajukan saat Anda mendemokan pekerjaan sesi ini. Daftar ini sengaja dibuka agar Anda mempersiapkan **pemahaman**, bukan hafalan. Anda boleh memakai alat bantu apa pun saat mengerjakan — tetapi kode yang tidak dapat Anda jelaskan sendiri tidak dinilai.
-
-1. Tunjukkan satu berkas Java Anda. Bagaimana saya tahu di folder mana berkas ini seharusnya berada, hanya dengan membaca baris pertamanya?
-2. Apa yang dilakukan Composer ketika saya menulis new Perpustakaan\Model\Buku()? Jelaskan langkah demi langkah.
-3. Mengapa vendor/ dan target/ tidak boleh di-commit, tetapi composer.lock harus?
-4. Tunjukkan dependensi eksternal yang Anda tambahkan, lalu tunjukkan baris kode yang memakainya.
-5. Apa arti penanda versi ^2.0 pada composer.json Anda? Versi 3.0 akan ikut terpasang atau tidak?
-6. Saya hapus folder vendor/ Anda sekarang. Apa yang harus Anda lakukan agar program berjalan lagi?
-7. Mengapa struktur src/main/java ini penting untuk dipahami sekarang, padahal kita baru memakai Spring Boot di sesi 14?
-
-## J. Kesalahan yang sering terjadi
-
-| Gejala | Penyebab yang lazim | Cara memperbaiki |
-|---|---|---|
-| ClassNotFoundException saat menjalankan Java | Nama package tidak cocok dengan struktur folder, atau mainClass salah ditulis. | Samakan package dengan folder. Tulis mainClass dengan nama lengkap termasuk package-nya. |
-| PHP: Class "Perpustakaan\Model\Buku" not found | Pemetaan PSR-4 salah, atau autoload belum dibangun ulang. | Periksa composer.json, lalu jalankan composer dump-autoload. Perhatikan huruf besar-kecil nama folder — di Linux itu berpengaruh. |
-| mvn: BUILD FAILURE — source option 25 is no longer supported | JAVA_HOME menunjuk ke JDK lama. | Perbaiki JAVA_HOME, buka terminal baru, jalankan mvn -v untuk memastikan. |
-| composer install gagal karena tidak ada internet | Lab tanpa akses keluar. | Gunakan cermin lokal yang disediakan asisten, atau jalankan composer dump-autoload --no-scripts untuk membangun autoload tanpa dependensi eksternal. |
-| target/ atau vendor/ tetap muncul di git status | Sudah terlanjur ter-commit sebelum .gitignore dipasang. | git rm -r --cached target vendor lalu commit ulang. |
-
-## Lembar verifikasi demo
-
-Diisi oleh dosen atau asisten pada saat demo. Tugas tanpa lembar terverifikasi tidak dinilai.
-
-|  |  |
-|---|---|
-| Nama / NIM |  |
-| Tanggal demo |  |
-| Nilai sesi ini |  |
-| Catatan penguji |  |
-| Paraf penguji |  |
+- Package Java menggunakan nama domain terbalik dan susunan folder yang
+  mengikuti deklarasi package.
+- Composer menggunakan PSR-4 agar kelas pada namespace `Perpustakaan\\`
+  ditemukan otomatis dari folder `src/`.
+- Datafaker dan Carbon digunakan sebagai dependensi eksternal pada masing-masing
+  proyek, bukan hanya dicantumkan di konfigurasi.
+- `composer.lock` dipertahankan agar instalasi Composer menggunakan versi
+  dependensi yang konsisten.
+- Folder hasil build seperti `target/` dan `vendor/` merupakan artefak lokal
+  dependensi PHP dapat dipasang kembali dengan `composer install`.
 
 ---
 
-_Modul ini disusun 10 September 2026. Versi teknologi yang dirujuk (Java 25 LTS, PHP 8.4/8.5, Laravel 13, Spring Boot 4.1) diverifikasi pada tanggal tersebut dan perlu diperiksa ulang sebelum semester berjalan._
+## Kesimpulan
+
+Praktikum ini menerapkan struktur package dan namespace pada Java serta
+autoload PSR-4 pada PHP. Maven dan Composer membantu mengelola proses build dan
+dependensi sehingga aplikasi dapat dijalankan dengan langkah yang terukur dan
+reproducible.
+
+Dokumen ini dibuat sebagai bagian dari tugas Praktikum PBO A &copy Milik
+Mochammad Jihan Isfalana - 4525210110
