@@ -3,53 +3,45 @@
 namespace Perpustakaan\Model;
 
 use Carbon\Carbon;
-use InvalidArgumentException;
-use Perpustakaan\Model\Jurusan;
-use Perpustakaan\Model\Mahasiswa;
 
-class Anggota extends Jurusan
+final class Anggota
 {
-    private string $kodeAnggota;
-    private Carbon $anggotaSejak;
-    private Mahasiswa $anggotaPerpus;
+    private ?Carbon $anggotaSejak = null;
+    private ?Mahasiswa $anggotaPerpus = null;
 
-    public function __construct(string $kodeJurusan, string $namaJurusan, string $kodeAnggota)
-    {
-        parent::__construct($kodeJurusan, $namaJurusan);
-        $this->kodeAnggota = $kodeAnggota;
-    }
+    public function __construct(
+        private readonly string $kodeJurusan,
+        private readonly string $namaJurusan,
+        private readonly string $kodeAnggota
+    ) {}
 
     public function daftarkanAnggota(Mahasiswa $m, Carbon $masaKeanggotaan): void
     {
-        if ($m === null) {
-            throw new InvalidArgumentException("Mahasiswa tidak boleh kosong");
-        }
-
         $this->anggotaPerpus = $m;
         $this->anggotaSejak = $masaKeanggotaan;
     }
 
     public function checkMasaKeanggotaan(Carbon $dateNow): string
     {
-        if ($this->anggotaSejak === null) {
-            return "Keanggotaan belum didaftarkan";
+        if ($this->anggotaSejak === null || $this->anggotaPerpus === null) {
+            return 'Keanggotaan belum didaftarkan';
         }
 
-
-        // Mengecek apakah waktu sekarang melebihi 3 tahun dari masa pendaftaran
         if ($dateNow->isAfter($this->anggotaSejak->copy()->addYears(3))) {
-            return "Keanggotaan tidak valid (lebih dari 3 tahun)";
+            return 'Keanggotaan tidak valid (lebih dari 3 tahun)';
         }
 
-        return "Keanggotaan valid";
+        return 'Keanggotaan valid';
     }
 
     public function getKeanggotaan(): void
     {
-        echo "Nama Anggota: " . ($this->anggotaPerpus) . "\n";
-        echo "Jurusan: " . parent::getNama() . "\n";
-        echo "Kode Anggota: " . $this->kodeAnggota . "\n";
-        echo "Anggota Perpustakaan Sejak: " . ($this->anggotaSejak ? $this->formatDateMasaAnggota($this->anggotaSejak) : "-") . "\n";
+        echo 'Nama Anggota: ' . ($this->anggotaPerpus ?? 'Belum didaftarkan') . PHP_EOL;
+        echo 'Jurusan: ' . $this->namaJurusan . PHP_EOL;
+        echo 'Kode Anggota: ' . $this->kodeAnggota . PHP_EOL;
+        echo 'Anggota Perpustakaan Sejak: '
+            . ($this->anggotaSejak === null ? '-' : $this->formatDateMasaAnggota($this->anggotaSejak))
+            . PHP_EOL;
     }
 
     private function formatDateMasaAnggota(Carbon $date): string

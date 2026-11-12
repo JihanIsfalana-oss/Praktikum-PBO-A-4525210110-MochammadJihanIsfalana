@@ -22,36 +22,43 @@ public class Buku {
     private final List<Bab> bab = new ArrayList<>();
 
     public Buku(String nomorInduk, String judul, String penulis, int jumlahEksemplar) {
-        if (jumlahEksemplar < 0){
-            throw new IllegalAccessError("Jumlah Eksemplar tidak boleh negatif!");
+        // TODO 1: tolak jumlah eksemplar negatif.
+        if (jumlahEksemplar < 0) {
+            throw new IllegalArgumentException("jumlah eksemplar tidak boleh negatif");
         }
-
         this.nomorInduk = nomorInduk;
         this.judul = judul;
         this.penulis = penulis;
         this.jumlahEksemplar = jumlahEksemplar;
     }
 
-
+    /**
+     * TODO 2: satu-satunya cara Bab lahir.
+     *         Perhatikan: parameternya nomor dan judul, BUKAN objek Bab.
+     *         Kalau Anda menerima objek Bab dari luar, ini menjadi agregasi.
+     */
     public void tambahBab(int nomor, String judulBab) {
-        Bab objekBab = new Bab(nomor, judulBab);
-        this.bab.add(objekBab);
+        bab.add(new Bab(nomor, judulBab));
     }
 
+    /**
+     * TODO 3: kembalikan salinan yang tidak bisa diubah.
+     *         Petunjuk: List.copyOf(...)
+     *         Coba dulu mengembalikan `bab` apa adanya, jalankan bukti-relasi.md
+     *         percobaan 1, lalu perbaiki. Rasakan bedanya.
+     */
     public List<Bab> getBab() {
-        return List.copyOf(this.bab);
+        return List.copyOf(bab);   // ganti
     }
 
     public boolean tersedia() { return jumlahEksemplar > 0; }
 
+    /** TODO 4: kurangi stok; tolak bila sudah nol. */
     public void kurangiStok() {
-        if (jumlahEksemplar == 0){
-            System.out.println("Stok Eksampelar = 0");
-
-            return;
+        if (jumlahEksemplar <= 0) {
+            throw new IllegalStateException("stok buku sudah habis");
         }
-
-        this.jumlahEksemplar--;
+        --jumlahEksemplar;
     }
 
     public void tambahStok() { jumlahEksemplar++; }
@@ -74,7 +81,7 @@ public class Buku {
         private final int nomor;
         private final String judul;
 
-        private   Bab(int nomor, String judul) {
+        private Bab(int nomor, String judul) {
             this.nomor = nomor;
             this.judul = judul;
         }

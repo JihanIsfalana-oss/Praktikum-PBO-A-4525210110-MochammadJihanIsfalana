@@ -6,9 +6,8 @@ package id.ac.univpancasila.perpustakaan.exception;
  */
 public class AnggotaTidakDitemukanException extends PerpustakaanException {
     private final String idAnggota;
-    
     public AnggotaTidakDitemukanException(String idAnggota) {
-        super("Anggota Perpustakaan dengan ID: " + idAnggota + " tidak ditemukan !\n");
+        super("Anggota dengan ID " + idAnggota + " tidak ditemukan");
         this.idAnggota = idAnggota;
     }
 

@@ -24,7 +24,7 @@
 
   <properties>
     <!-- TODO 4: setel ke 25 (Java 25 LTS). -->
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>25</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -34,12 +34,12 @@
               Cari di https://central.sonatype.com
               Dependensi yang ditambahkan tetapi tidak dipakai tidak dinilai.
     -->
-    <dependency>
-      <groupId>net.datafaker</groupId>
-      <artifactId>datafaker</artifactId>
-      <version>2.1.0</version>
-    </dependency>
-  </dependencies>
+  <dependency>
+    <groupId>net.datafaker</groupId>
+    <artifactId>datafaker</artifactId>
+    <version>2.1.0</version>
+  </dependency>
+</dependencies>
 
   <build>
     <plugins>
@@ -52,7 +52,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.0</version>
 
-        <!-- tambahkan bagian ini agar hanya menjalankan mvn exec:java -->
+        <!-- tambahkan bagian ini agar hanya menjalankan mvn exec:java-->
         <configuration>
           <mainClass>id.ac.univpancasila.perpustakaan.Main</mainClass>
         </configuration>

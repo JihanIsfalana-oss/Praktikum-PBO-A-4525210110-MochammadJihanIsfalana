@@ -1,14 +1,20 @@
 package id.ac.univpancasila.perpustakaan.service;
 
+
 import java.util.Scanner;
 
 
-import id.ac.univpancasila.perpustakaan.exception.*;
+import id.ac.univpancasila.perpustakaan.exception.AnggotaTidakDitemukanException;
+import id.ac.univpancasila.perpustakaan.exception.BatasPinjamTerlampauiException;
+import id.ac.univpancasila.perpustakaan.exception.BukuSedangDipinjamException;
+import id.ac.univpancasila.perpustakaan.exception.BukuTidakDitemukanException;
+import id.ac.univpancasila.perpustakaan.exception.PerpustakaanException;
+
 
 public class PerpustakaanService {
     public static void tambahAnggota(LibraryService libService, Scanner scanner) {
         System.out.println("\n--- Form Tambah Anggota ---");
-        System.out.print("Masukkan ID Anggota: ");
+        System.out.println("Masukkan ID Anggota: ");
         String idAnggota = scanner.nextLine().trim();
 
 
@@ -19,7 +25,7 @@ public class PerpustakaanService {
 
 
         libService.daftarkanAnggota(idAnggota);
-        System.out.println(">> BERHASIL: Anggota dengan ID '" + "(" + idAnggota + ")" + "' telah terdaftar.");
+        System.out.println(">> BERHASIL: Anggota dengan ID '" + idAnggota + "' telah terdaftar.");
     }
 
 

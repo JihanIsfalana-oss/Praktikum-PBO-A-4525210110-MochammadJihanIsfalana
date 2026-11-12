@@ -9,7 +9,7 @@ sesi-09/java/
 │   ├── main/
 │   │   ├── java/                        <- kode program
 │   │   │   └── id/ac/univpancasila/perpustakaan/
-│   │   │       ├── main.java
+│   │   │       ├── App.java
 │   │   │       ├── model/
 │   │   │       │   ├── Buku.java
 │   │   │       │   ├── Anggota.java
@@ -46,7 +46,7 @@ PERINTAH MAVEN YANG PALING SERING DIPAKAI
   mvn test               kompilasi + jalankan pengujian
   mvn package            hasilkan berkas .jar di target/
   mvn dependency:tree    lihat pohon dependensi
-  mvn exec:java -Dexec.mainClass=<nama kelas lengkap>
+   =<nama kelas lengkap>
 
 
 TUGAS ANDA

@@ -20,20 +20,31 @@ public class Jurusan {
         this.nama = nama;
     }
 
+    /**
+     * TODO 1: terima objek Mahasiswa dari luar — inilah tanda agregasi.
+     *         Tolak null, dan jangan menambahkan yang sudah terdaftar.
+     */
     public void daftarkan(Mahasiswa m) {
-        if (m == null){
-            throw new IllegalAccessError("Mahasiswa tidak boleh kosong");
+        if (m == null) {
+            throw new IllegalArgumentException("mahasiswa tidak boleh null");
         }
-
-        this.mahasiswa.add(m);
+        if (mahasiswa.contains(m)) {
+            throw new IllegalArgumentException("mahasiswa sudah terdaftar");
+        }
+        mahasiswa.add(m);
     }
 
+    /** TODO 2: lepaskan dari jurusan ini. Objeknya TETAP HIDUP di luar sana. */
     public void keluarkan(Mahasiswa m) {
-        this.mahasiswa.remove(m);
+        if (!mahasiswa.contains(m)) {
+            throw new IllegalArgumentException("mahasiswa tidak terdaftar");
+        }
+        mahasiswa.remove(m);
     }
 
+    /** TODO 3: kembalikan salinan tak-berubah. */
     public List<Mahasiswa> getMahasiswa() {
-        return List.copyOf(this.mahasiswa);
+        return List.copyOf(mahasiswa);   // ganti
     }
 
     public String getNama() { return nama; }

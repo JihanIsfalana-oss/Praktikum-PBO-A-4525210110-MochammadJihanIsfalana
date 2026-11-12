@@ -5,12 +5,12 @@ package id.ac.univpancasila.perpustakaan.exception;
  *       Menyertakan batas di dalam exception memudahkan pemanggil
  *       menyusun pesan tanpa harus mengetahui aturannya sendiri.
  */
-public class BatasPinjamTerlampauiException extends PerpustakaanException{
-    private final String idAnggota;
+public class BatasPinjamTerlampauiException extends PerpustakaanException {
+    private  final String idAnggota;
     private final int batas;
 
     public BatasPinjamTerlampauiException(String idAnggota, int batas) {
-        super("Anggota Perpustakaan dengan ID: " + idAnggota + " telah mencapai batas maksimum peminjaman !\n");
+        super("Anggota dengan ID " + idAnggota + " telah mencapai batas maksimum peminjaman");
         this.idAnggota = idAnggota;
         this.batas = batas;
     }
@@ -23,3 +23,4 @@ public class BatasPinjamTerlampauiException extends PerpustakaanException{
         return this.batas;
     }
 }
+

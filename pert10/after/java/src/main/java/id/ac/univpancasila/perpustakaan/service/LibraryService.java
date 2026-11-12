@@ -1,5 +1,4 @@
 package id.ac.univpancasila.perpustakaan.service;
-
 /**
  * Sesi 10 Langkah 2 — BAHAN REFACTORING.
  *
@@ -18,19 +17,22 @@ package id.ac.univpancasila.perpustakaan.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import id.ac.univpancasila.perpustakaan.exception.*;
+import id.ac.univpancasila.perpustakaan.exception.AnggotaTidakDitemukanException;
+import id.ac.univpancasila.perpustakaan.exception.BatasPinjamTerlampauiException;
+import id.ac.univpancasila.perpustakaan.exception.BukuSedangDipinjamException;
+import id.ac.univpancasila.perpustakaan.exception.BukuTidakDitemukanException;
 
 public class LibraryService {
 
-    public static final int BATAS_PINJAM = 2;
+    public static final int BATAS_PINJAM = 3;
 
-    private final Map<String, Integer> stokBuku = new HashMap<>();
-    private final Map<String, String> judulBuku = new HashMap<>();
+    private final Map<String, Integer> stok = new HashMap<>();
+    private final Map<String, String> judul = new HashMap<>();
     private final Map<String, Integer> pinjaman = new HashMap<>();
 
     public void tambahBuku(String isbn, String judulBuku, int eksemplar) {
-        stokBuku.merge(isbn, eksemplar, Integer::sum);
-        this.judulBuku.put(isbn, judulBuku);
+        stok.merge(isbn, eksemplar, Integer::sum);
+        judul.put(isbn, judulBuku);
     }
 
     public void daftarkanAnggota(String idAnggota) {
@@ -43,32 +45,33 @@ public class LibraryService {
             throw new AnggotaTidakDitemukanException(idAnggota);
         }
 
-        if (!stokBuku.containsKey(isbn)){
+        if (!stok.containsKey(isbn)){
             throw new BukuTidakDitemukanException(isbn);
         }
 
-        if (stokBuku.get(isbn) <= 0){
-            throw new BukuSedangDipinjamException(isbn, judulBuku.get(isbn));
+        if (stok.get(isbn) <= 0){
+            throw new BukuSedangDipinjamException(isbn, judul.get(isbn));
         }
 
         if (pinjaman.get(idAnggota) >= BATAS_PINJAM){
             throw new BatasPinjamTerlampauiException(idAnggota, BATAS_PINJAM);
         }
 
-        stokBuku.merge(isbn, -1, Integer::sum);
+        stok.merge(isbn, -1, Integer::sum);
         pinjaman.merge(idAnggota, 1, Integer::sum);
         return true;
     }
 
     public int sisaEksemplar(String isbn) {
-        return stokBuku.getOrDefault(isbn, 0);
+        return stok.getOrDefault(isbn, 0);
     }
 
     public String judulDari(String isbn) {
-        return judulBuku.get(isbn);
+        return judul.get(isbn);
     }
 
     public Map<String, String> getSemuaJudul() {
-        return this.judulBuku;
+        return this.judul;
     }
 }
+

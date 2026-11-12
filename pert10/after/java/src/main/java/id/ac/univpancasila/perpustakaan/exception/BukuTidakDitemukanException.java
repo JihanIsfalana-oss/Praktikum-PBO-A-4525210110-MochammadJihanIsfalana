@@ -17,7 +17,7 @@ public class BukuTidakDitemukanException extends PerpustakaanException {
     public BukuTidakDitemukanException(String isbn) {
         // TODO 2: panggil super(...) dengan pesan yang menyebut ISBN-nya,
         //         misalnya: "Buku dengan ISBN 978-1 tidak ditemukan"
-        super("Buku dengan ISBN: " + isbn + "= tidak ditemukan!\n");
+        super("Buku dengan ISBN " + isbn + " tidak ditemukan");
 
         // TODO 3: simpan isbn ke atribut.
         this.isbn = isbn;
@@ -27,6 +27,5 @@ public class BukuTidakDitemukanException extends PerpustakaanException {
     public String getIsbn(){
         return this.isbn;
     }
-
-
 }
+
