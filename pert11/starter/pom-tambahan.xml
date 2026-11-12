@@ -1,0 +1,32 @@
+<!--
+  Sesi 11 — potongan yang harus DISALIN ke pom.xml proyek Anda.
+
+  1. Tambahkan blok <dependency> ke dalam <dependencies> yang sudah ada.
+  2. Tambahkan blok <plugin> ke dalam <build><plugins> yang sudah ada.
+  3. Jalankan: mvn test
+
+  Catatan: nomor versi di bawah berlaku saat modul ini disusun
+  (September 2026) dan mungkin sudah ada rilis lebih baru.
+  Periksa di https://central.sonatype.com sebelum dipakai.
+-->
+
+<!-- ke dalam <dependencies> -->
+<dependency>
+  <groupId>org.junit.jupiter</groupId>
+  <artifactId>junit-jupiter</artifactId>
+  <version>5.11.3</version>
+  <scope>test</scope>
+</dependency>
+
+<!--
+  scope=test berarti dependensi ini hanya tersedia saat pengujian dan
+  TIDAK ikut masuk ke berkas .jar hasil produksi. Perhatikan gagasannya —
+  sama seperti autoload-dev pada Composer.
+-->
+
+<!-- ke dalam <build><plugins> -->
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <version>3.5.2</version>
+</plugin>
