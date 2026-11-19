@@ -6,7 +6,9 @@
 **Durasi:** 170 menit (1 SKS praktikum) · **Bobot:** 5% dari nilai praktikum  
 **Bahasa:** Java 25 dan PHP 8.4+
 
-> Versi cetak modul ini: [`Modul-Praktikum-11-collections-generics-dan-unit-test-pertama.docx`](Modul-Praktikum-11-collections-generics-dan-unit-test-pertama.docx). Kerangka kode: [`starter/`](starter/).
+```txt
+Versi cetak modul ini: [`Modul-Praktikum-11-collections-generics-dan-unit-test-pertama.docx`](Modul-Praktikum-11-collections-generics-dan-unit-test-pertama.docx). Kerangka kode: [`starter/`](starter/).
+```
 
 ---
 
@@ -26,13 +28,13 @@
 
 Salin ke folder tugas Anda; **jangan** menyunting berkas aslinya. Setiap komentar `TODO` harus Anda lengkapi sendiri — kode yang disalin dari sumber lain akan terlihat pada sesi demo.
 
-| Berkas | Keterangan |
-|---|---|
-| `starter/java/Repository.java` | Kerangka kelas generik Repository<T> dengan TODO. |
-| `starter/java/RepositoryTest.java` | Kerangka uji JUnit 5 dengan TODO pada assertion. |
-| `starter/php/KoleksiBuku.php` | Kerangka typed collection dengan TODO. |
-| `starter/php/KoleksiBukuTest.php` | Kerangka uji PHPUnit dengan TODO. |
-| `starter/pom-tambahan.xml` | Potongan dependensi JUnit 5 dan plugin surefire yang harus disalin ke pom.xml Anda. |
+| Berkas                             | Keterangan                                                                          |
+| ---------------------------------- | ----------------------------------------------------------------------------------- |
+| `starter/java/Repository.java`     | Kerangka kelas generik Repository<T> dengan TODO.                                   |
+| `starter/java/RepositoryTest.java` | Kerangka uji JUnit 5 dengan TODO pada assertion.                                    |
+| `starter/php/KoleksiBuku.php`      | Kerangka typed collection dengan TODO.                                              |
+| `starter/php/KoleksiBukuTest.php`  | Kerangka uji PHPUnit dengan TODO.                                                   |
+| `starter/pom-tambahan.xml`         | Potongan dependensi JUnit 5 dan plugin surefire yang harus disalin ke pom.xml Anda. |
 
 ## D. Langkah kerja
 
@@ -127,22 +129,22 @@ _Dikerjakan bila langkah kerja selesai lebih awal. Tidak wajib, tetapi menambah 
 
 Seluruh luaran diserahkan melalui repositori Git pribadi Anda, dengan riwayat commit yang menunjukkan proses pengerjaan — bukan satu commit tunggal di akhir.
 
-| Berkas / folder | Keterangan |
-|---|---|
-| `src/main/.../Repository.java` | Kelas generik dengan Optional. |
-| `src/test/java/` | Kelas uji JUnit 5 yang seluruhnya lulus. |
-| `tests/` | Kelas uji PHPUnit yang seluruhnya lulus. |
-| `sesi-11/pilihan-koleksi.md` | Alasan pemilihan struktur koleksi, catatan null-safety, dan satu pesan kegagalan uji. |
-| `sesi-11/catatan-uji.md` | Refleksi tentang kasus uji tersulit. |
+| Berkas / folder                | Keterangan                                                                            |
+| ------------------------------ | ------------------------------------------------------------------------------------- |
+| `src/main/.../Repository.java` | Kelas generik dengan Optional.                                                        |
+| `src/test/java/`               | Kelas uji JUnit 5 yang seluruhnya lulus.                                              |
+| `tests/`                       | Kelas uji PHPUnit yang seluruhnya lulus.                                              |
+| `sesi-11/pilihan-koleksi.md`   | Alasan pemilihan struktur koleksi, catatan null-safety, dan satu pesan kegagalan uji. |
+| `sesi-11/catatan-uji.md`       | Refleksi tentang kasus uji tersulit.                                                  |
 
 ## H. Rubrik penilaian sesi ini
 
-| Aspek | Bobot | Kriteria |
-|---|---|---|
-| Kebenaran fungsional | 35% | Seluruh perintah pada langkah kerja berjalan dan menghasilkan keluaran yang diminta. |
-| Penerapan konsep sesi ini | 30% | Konsep yang menjadi Sub-CPMK sesi ini diterapkan dengan tepat, bukan sekadar membuat program berjalan. |
-| Keterbacaan dan konvensi | 10% | Penamaan bermakna, format konsisten, komentar seperlunya, riwayat commit wajar. |
-| Demo dan pertanyaan lisan | 25% | Mampu menjelaskan setiap baris kode sendiri dan menjawab pertanyaan demo. MENGGUGURKAN: tanpa demo, tugas tidak dinilai. |
+| Aspek                     | Bobot | Kriteria                                                                                                                 |
+| ------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------ |
+| Kebenaran fungsional      | 35%   | Seluruh perintah pada langkah kerja berjalan dan menghasilkan keluaran yang diminta.                                     |
+| Penerapan konsep sesi ini | 30%   | Konsep yang menjadi Sub-CPMK sesi ini diterapkan dengan tepat, bukan sekadar membuat program berjalan.                   |
+| Keterbacaan dan konvensi  | 10%   | Penamaan bermakna, format konsisten, komentar seperlunya, riwayat commit wajar.                                          |
+| Demo dan pertanyaan lisan | 25%   | Mampu menjelaskan setiap baris kode sendiri dan menjawab pertanyaan demo. MENGGUGURKAN: tanpa demo, tugas tidak dinilai. |
 
 ## I. Pertanyaan demo
 
@@ -158,25 +160,25 @@ Seluruh luaran diserahkan melalui repositori Git pribadi Anda, dengan riwayat co
 
 ## J. Kesalahan yang sering terjadi
 
-| Gejala | Penyebab yang lazim | Cara memperbaiki |
-|---|---|---|
-| mvn test tidak menemukan satu pun uji | Berkas uji tidak berada di src/test/java, atau namanya tidak berakhiran Test. | Ikuti konvensi Maven: src/test/java dan nama kelas berakhiran Test. |
-| PHPUnit: No tests executed | Namespace pengujian belum terdaftar di autoload-dev, atau folder tests salah. | Tambahkan autoload-dev pada composer.json lalu jalankan composer dump-autoload. |
-| ConcurrentModificationException | Koleksi diubah saat sedang di-iterasi. | Gunakan Iterator.remove(), removeIf(), atau kumpulkan dulu ke koleksi baru. |
-| json_encode menghasilkan objek, bukan larik | array_filter meninggalkan indeks berlubang. | Bungkus dengan array_values() setelah array_filter. |
-| Uji lulus padahal kode salah | Assertion terlalu longgar, mis. hanya memeriksa bahwa hasilnya tidak null. | Periksa nilai yang sesungguhnya diharapkan. Uji yang tidak pernah bisa gagal tidak membuktikan apa pun. |
+| Gejala                                      | Penyebab yang lazim                                                           | Cara memperbaiki                                                                                        |
+| ------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| mvn test tidak menemukan satu pun uji       | Berkas uji tidak berada di src/test/java, atau namanya tidak berakhiran Test. | Ikuti konvensi Maven: src/test/java dan nama kelas berakhiran Test.                                     |
+| PHPUnit: No tests executed                  | Namespace pengujian belum terdaftar di autoload-dev, atau folder tests salah. | Tambahkan autoload-dev pada composer.json lalu jalankan composer dump-autoload.                         |
+| ConcurrentModificationException             | Koleksi diubah saat sedang di-iterasi.                                        | Gunakan Iterator.remove(), removeIf(), atau kumpulkan dulu ke koleksi baru.                             |
+| json_encode menghasilkan objek, bukan larik | array_filter meninggalkan indeks berlubang.                                   | Bungkus dengan array_values() setelah array_filter.                                                     |
+| Uji lulus padahal kode salah                | Assertion terlalu longgar, mis. hanya memeriksa bahwa hasilnya tidak null.    | Periksa nilai yang sesungguhnya diharapkan. Uji yang tidak pernah bisa gagal tidak membuktikan apa pun. |
 
 ## Lembar verifikasi demo
 
 Diisi oleh dosen atau asisten pada saat demo. Tugas tanpa lembar terverifikasi tidak dinilai.
 
-|  |  |
-|---|---|
-| Nama / NIM |  |
-| Tanggal demo |  |
-| Nilai sesi ini |  |
-| Catatan penguji |  |
-| Paraf penguji |  |
+|                 |     |
+| --------------- | --- |
+| Nama / NIM      |     |
+| Tanggal demo    |     |
+| Nilai sesi ini  |     |
+| Catatan penguji |     |
+| Paraf penguji   |     |
 
 ---
 
