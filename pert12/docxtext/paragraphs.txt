@@ -1,0 +1,163 @@
+﻿UNIVERSITAS PANCASILA
+FAKULTAS TEKNIK â€” PROGRAM STUDI INFORMATIKA
+MODUL PRAKTIKUM PEMROGRAMAN BERORIENTASI OBJEK
+SESI 12
+REFACTORING DENGAN SOLID DAN REPOSITORY PATTERN
+Sub-CPMK
+Sub-CPMK-P8 â€” Mahasiswa mampu merefaktor kode agar patuh pada prinsip SOLID dan menerapkan Repository pattern dengan dependency injection manual. (P4, C4)
+Keterkaitan teori
+Pertemuan 12 â€” Prinsip SOLID dan Design Pattern Dasar
+Durasi
+170 menit (1 SKS praktikum)
+Bobot terhadap nilai praktikum
+6%
+Bahasa implementasi
+Java 25 dan PHP 8.4+
+A. Tujuan Sesi
+1.  Menemukan pelanggaran SOLID pada kode sendiri, bukan pada contoh buatan.
+2.  Memisahkan tanggung jawab penyimpanan dari aturan bisnis dengan Repository pattern.
+3.  Menyuntikkan dependensi lewat constructor secara manual, tanpa framework.
+4.  Membuktikan bahwa aturan bisnis kini dapat diuji tanpa penyimpanan sesungguhnya.
+B. Alat dan Bahan
+Proyek hasil sesi 9â€“11, termasuk unit test yang sudah berjalan.
+C. Berkas Starter
+Berkas berikut tersedia di repositori materi. Salin ke folder tugas Anda, JANGAN menyunting berkas aslinya. Setiap komentar TODO harus Anda lengkapi sendiri â€” kode yang disalin dari sumber lain akan terlihat pada sesi demo.
+Berkas
+Keterangan
+starter/java/BookRepository.java
+Interface kontrak dengan TODO.
+starter/java/InMemoryBookRepository.java
+Implementasi untuk pengujian, dengan TODO.
+starter/java/AturanDenda.java
+Interface Strategy dengan TODO.
+starter/php/repository.php
+Padanan PHP dengan TODO.
+starter/REFACTORING-template.md
+Template tabel sebelumâ€“sesudah yang harus Anda isi.
+D. Langkah Kerja
+Kerjakan berurutan. Jangan melanjutkan ke langkah berikutnya sebelum checkpoint terpenuhi.
+Langkah 1.  Audit SOLID atas kode sendiri
+Buka LibraryService Anda dari sesi 10â€“11. Bacalah seperti orang lain yang baru melihatnya.
+Isi bagian pertama REFACTORING.md: temukan MINIMAL TIGA pelanggaran SOLID. Untuk setiap temuan tuliskan: prinsip yang dilanggar, berkas dan baris, mengapa itu pelanggaran, dan akibatnya bila dibiarkan.
+Petunjuk tempat mencari: kelas yang menyimpan data sekaligus mengatur aturan bisnis sekaligus mencetak keluaran (SRP); rantai if untuk jenis anggota (OCP); pembuatan objek penyimpanan langsung di dalam layanan (DIP).
+CHECKPOINT â€” REFACTORING.md memuat tiga temuan dengan rujukan berkas dan baris yang nyata.
+
+Langkah 2.  Menerapkan Repository pattern
+Lengkapi interface BookRepository: cariByIsbn, cariSemua, simpan, kurangiStok.
+Buat InMemoryBookRepository sebagai implementasinya.
+Ubah LibraryService agar TIDAK LAGI membuat sendiri penyimpanannya. Ia menerima BookRepository lewat constructor.
+Pastikan LibraryService tidak lagi menyebut satu pun kelas konkret penyimpanan.
+CHECKPOINT â€” Kata "new" tidak muncul lagi di dalam LibraryService untuk urusan penyimpanan.
+
+Langkah 3.  Menerapkan Strategy untuk aturan denda
+Rantai if untuk jenis anggota (mahasiswa, dosen, kehormatan) diganti dengan interface AturanDenda dan tiga implementasinya.
+Tambahkan AturanDendaFactory yang memilih implementasi berdasarkan jenis anggota.
+Buktikan Open-Closed: tambahkan jenis keempat (misalnya alumni) TANPA menyunting satu baris pun pada LibraryService.
+CHECKPOINT â€” Menambah aturan denda keempat hanya menambah satu berkas dan satu baris di factory.
+
+Langkah 4.  Dependency injection manual
+Di App (titik masuk program), rakit seluruh objek: buat repository, buat aturan denda, lalu suntikkan keduanya ke LibraryService.
+Perhatikan bahwa App kini menjadi SATU-SATUNYA tempat kelas konkret disebut.
+Catat di REFACTORING.md: berapa kelas yang perlu diubah bila penyimpanan diganti dari memori ke basis data? (Jawaban yang benar: satu berkas baru, satu baris di App.)
+CHECKPOINT â€” Seluruh perakitan objek terjadi di App, dan tidak ada kelas lain yang membuat dependensinya sendiri.
+
+Langkah 5.  Membuktikan manfaatnya lewat pengujian
+Perbarui unit test dari sesi 11: kini LibraryService dapat diuji dengan InMemoryBookRepository, tanpa penyimpanan sesungguhnya.
+Buat satu implementasi repository palsu tambahan yang SELALU melempar exception, lalu buktikan bahwa LibraryService menanganinya dengan benar.
+Inilah bukti nyata Dependency Inversion: aturan bisnis dapat diuji terpisah dari penyimpanannya.
+
+Terminal
+mvn test
+./vendor/bin/phpunit tests
+
+CHECKPOINT â€” Seluruh uji lulus, dan minimal satu uji memakai repository palsu.
+
+Langkah 6.  Menuliskan yang sengaja TIDAK direfaktor
+Bagian terakhir REFACTORING.md: sebutkan SATU tempat di kode Anda yang sengaja TIDAK Anda beri pattern, beserta alasannya.
+Bagian ini dinilai sama beratnya dengan bagian refactoring. Kemampuan menahan diri dari over-engineering sama pentingnya dengan kemampuan menerapkan pattern.
+CHECKPOINT â€” REFACTORING.md memuat satu keputusan untuk TIDAK memakai pattern, dengan alasan yang berpijak pada kebutuhan nyata.
+
+E. Latihan Mandiri di Lab
+Dikerjakan bila langkah kerja selesai lebih awal. Tidak wajib, tetapi menambah nilai pada aspek penerapan konsep.
+1.  Terapkan Singleton pada salah satu kelas Anda, lalu coba tulis unit test untuknya. Rasakan kesulitannya. Kembalikan menjadi objek biasa yang di-inject, dan bandingkan.
+2.  Cari satu interface di kode Anda yang punya lebih dari lima method. Pecah menjadi dua interface yang lebih kecil sesuai Interface Segregation.
+F. Tugas Rumah
+1.  TUGAS 4 (mata kuliah teori) dikerjakan bersama sesi ini: analisis dan refactoring SOLID lengkap dengan REFACTORING.md.
+2.  Persiapan sesi 13: pasang Laravel 13 di perangkat Anda. Jalankan composer create-project laravel/laravel:^13.0 latihan-laravel dan pastikan php artisan serve berhasil. Selesaikan SEBELUM sesi 13 â€” waktu lab tidak akan cukup untuk pemasangan.
+G. Luaran yang Dikumpulkan
+Seluruh luaran diserahkan melalui repositori Git pribadi Anda, dengan riwayat commit yang menunjukkan proses pengerjaan â€” bukan satu commit tunggal di akhir.
+Berkas / folder
+Keterangan
+BookRepository dan implementasinya
+Di kedua proyek.
+AturanDenda dan tiga implementasi + factory
+Di kedua proyek.
+LibraryService
+Versi yang menerima dependensi lewat constructor.
+REFACTORING.md
+Tiga temuan SOLID, tabel sebelumâ€“sesudah, dan satu keputusan untuk tidak memakai pattern.
+Unit test yang diperbarui
+Termasuk satu uji dengan repository palsu.
+H. Rubrik Penilaian Sesi Ini
+Aspek
+Bobot
+Kriteria
+Kebenaran fungsional
+35%
+Seluruh perintah pada langkah kerja berjalan dan menghasilkan keluaran yang diminta.
+Penerapan konsep sesi ini
+30%
+Konsep yang menjadi Sub-CPMK sesi ini diterapkan dengan tepat, bukan sekadar membuat program berjalan.
+Keterbacaan dan konvensi
+10%
+Penamaan bermakna, format konsisten, komentar seperlunya, riwayat commit wajar.
+Demo dan pertanyaan lisan
+25%
+Mampu menjelaskan setiap baris kode sendiri dan menjawab pertanyaan demo. MENGGUGURKAN: tanpa demo, tugas tidak dinilai.
+I. Pertanyaan Demo
+Pertanyaan berikut akan diajukan dosen atau asisten saat Anda mendemokan pekerjaan sesi ini. Daftar ini sengaja dibuka agar Anda mempersiapkan pemahaman, bukan hafalan. Anda boleh memakai alat bantu apa pun saat mengerjakan â€” tetapi kode yang tidak dapat Anda jelaskan sendiri tidak dinilai.
+
+1.  Sebutkan satu pelanggaran SOLID yang Anda temukan di kode Anda sendiri. Tunjuk barisnya, lalu tunjuk versi perbaikannya.
+2.  Di LibraryService Anda, di mana objek penyimpanan dibuat? Kalau jawabannya "tidak di sini", lalu di mana?
+3.  Saya ingin mengganti penyimpanan dari memori ke basis data. Berkas apa saja yang harus saya ubah? Jangan dikerjakan â€” cukup sebutkan.
+4.  Tambahkan aturan denda untuk alumni sekarang. Berapa berkas lama yang isinya berubah?
+5.  Tunjukkan uji yang memakai repository palsu. Mengapa uji itu tidak mungkin ditulis sebelum refactoring?
+6.  Bagian mana dari kode Anda yang sengaja TIDAK diberi pattern? Mengapa?
+7.  Kalau saya memaksa Anda menambahkan Factory untuk membuat objek Buku, apa untung dan ruginya?
+J. Kesalahan yang Sering Terjadi
+Gejala
+Penyebab yang lazim
+Cara memperbaiki
+LibraryService masih memanggil new untuk penyimpanan
+Refactoring berhenti di pembuatan interface saja.
+Pindahkan pembuatan objek ke App dan terima lewat constructor.
+Interface dibuat tetapi hanya punya satu implementasi selamanya
+Abstraksi spekulatif.
+Interface dibenarkan di sini karena dipakai untuk pengujian dengan implementasi palsu â€” pastikan implementasi kedua itu benar-benar ada.
+Factory berisi rantai if yang persis sama dengan sebelumnya
+Rantai if hanya dipindahkan, bukan dihilangkan.
+Itu masih dapat diterima: rantai kini terpusat di SATU tempat, bukan tersebar. Yang penting LibraryService bersih.
+Unit test rusak setelah refactoring
+Constructor berubah tetapi uji belum disesuaikan.
+Perbarui uji â€” itu memang bagian dari pekerjaan refactoring, bukan gangguan.
+REFACTORING.md hanya berisi daftar perubahan tanpa alasan
+Menganggap dokumen sebagai formalitas.
+Alasan adalah isi utamanya. Tanpa alasan, dokumen tidak dinilai.
+Lembar Verifikasi Demo
+Diisi oleh dosen atau asisten pada saat demo. Tugas tanpa lembar terverifikasi tidak dinilai.
+Nama / NIM
+
+Tanggal demo
+
+Nilai sesi ini:
+Catatan penguji
+
+
+
+
+Paraf penguji
+
+
+
+
+Modul ini disusun 10 September 2026 oleh Adi Wahyu Pribadi, S.Si., M.Kom. Versi teknologi yang dirujuk (Java 25 LTS, PHP 8.4/8.5, Laravel 13, Spring Boot 4.1) diverifikasi pada tanggal tersebut dan perlu diperiksa ulang sebelum semester berjalan.
