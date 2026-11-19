@@ -24,7 +24,7 @@
 
   <properties>
     <!-- TODO 4: setel ke 25 (Java 25 LTS). -->
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>25</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
