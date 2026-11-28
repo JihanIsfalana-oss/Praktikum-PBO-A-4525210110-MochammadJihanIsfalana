@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: admin-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/admin_db
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+customer:
+  base-url: ${CUSTOMER_BASE_URL:http://localhost:8082}
